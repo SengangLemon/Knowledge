@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{Lean}{
+  morekeywords={namespace,end,def,theorem,structure,abbrev,where,by,import,open,exact,fun,calc,have,show},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]"
+}
+
+\lstset{
+  language=Lean,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{red!50!black},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single
+}
+
+\title{Lean Source Companion (All Files)}
+\author{TheMathBook / Part I / Linear Algebra}
+\date{\today}
+
+\newtheorem*{readpoint}{Read Point}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+This document converts \emph{all Lean files in this project} into a readable study note.
+It is not a replacement for Lean; it is a parallel reading layer.
+
+\section*{Target Lean Files}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{AxlerLean.lean}
+  \item \texttt{AxlerLean/AxlerSummary.lean}
+  \item \texttt{AxlerLean/Exercises.lean}
+  \item \texttt{AxlerLean/Basic.lean}
+  \item \texttt{Main.lean}
+\end{itemize}
+
+\section{AxlerLean.lean (Library Root)}
+\begin{readpoint}
+This is the root module. It collects the two core modules:
+\texttt{AxlerSummary} and \texttt{Exercises}.
+\end{readpoint}
+
+\begin{lstlisting}
+import AxlerLean.AxlerSummary
+import AxlerLean.Exercises
+\end{lstlisting}
+
+\section{AxlerLean/AxlerSummary.lean (Concept + Core Theorems)}
+
+\subsection*{1) Core Data Model}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{Vec n := Fin n -> Int} : finite-dimensional integer vectors
+  \item \texttt{LinearMap n m} : map with additivity + scalar compatibility
+\end{itemize}
+
+\begin{lstlisting}
+abbrev Vec (n : Nat) := Fin n -> Int
+
+structure LinearMap (n m : Nat) where
+  toFun : Vec n -> Vec m
+  map_add : ...
+  map_smul : ...
+\end{lstlisting}
+
+\subsection*{2) Composition Laws}
+\begin{itemize}[leftmargin=1.5em]
+  \item identity map: \texttt{LinearMap.id}
+  \item composition: \texttt{LinearMap.comp}
+  \item proved laws:
+  \begin{itemize}
+    \item \texttt{comp\_assoc}
+    \item \texttt{comp\_id\_left}
+    \item \texttt{comp\_id\_right}
+  \end{itemize}
+\end{itemize}
+
+\subsection*{3) Chapter-Aligned Summary (Axler-style flow)}
+\paragraph{Ch1 Vector Spaces}
+\texttt{zero\_smul\_vec}, \texttt{add\_zero\_vec}, \texttt{neg\_add\_vec}
+
+\paragraph{Ch2 Finite-Dimensional Spaces}
+\texttt{vec\_ext}, \texttt{vec\_eq\_of\_all\_coords\_eq}, \texttt{vec\_zero\_unique}
+
+\paragraph{Ch3 Linear Maps}
+\texttt{id\_apply}, \texttt{comp\_apply}, \texttt{comp\_preserves\_smul}
+
+\paragraph{Ch4 Polynomials}
+\texttt{evalLin}, \texttt{evalLin\_at\_zero}, \texttt{evalLin\_one}
+
+\paragraph{Ch5 Eigenvalues/Eigenvectors}
+\texttt{IsEigenvector}, \texttt{eigenvector\_nonzero}, \texttt{eigenvector\_eq\_scale}
+
+\paragraph{Ch6 Inner Product (2D model)}
+\texttt{dot2}, \texttt{dot2\_comm}, \texttt{dot2\_zero\_left}
+
+\paragraph{Ch7 Operators}
+\texttt{op\_preserves\_add}, \texttt{op\_preserves\_zero}
+
+\paragraph{Ch8 Complex-like model}
+\texttt{Pair}, \texttt{conj}, \texttt{conj\_involutive}, \texttt{conj\_re\_fixed}
+
+\paragraph{Ch9 Determinants (2x2 model)}
+\texttt{det2}, \texttt{det2\_zero\_of\_equal\_rows}, \texttt{det2\_zero\_matrix}
+
+\section{AxlerLean/Exercises.lean (Problem--Answer Format)}
+\begin{readpoint}
+This file is the reader-friendly practice layer on top of \texttt{AxlerSummary.lean}.
+Problems are tiered:
+\texttt{Basic}, \texttt{Standard}, \texttt{Challenge}.
+\end{readpoint}
+
+\subsection*{Basic (p1--p6)}
+Coordinate identities, identity map action, linear polynomial at zero, zero determinant.
+
+\subsection*{Standard (p7--p12)}
+Eigenvector nonzero condition, dot with zero, map zero to zero, conjugation involution,
+right identity composition, linear polynomial at one.
+
+\subsection*{Challenge (p13--p18)}
+Left identity composition, associativity, zero-vector uniqueness, dot commutativity,
+equal-row determinant zero, conjugation fixing real part.
+
+\paragraph{How to read}
+\begin{enumerate}[leftmargin=1.5em]
+  \item Read problem comment first.
+  \item Match theorem name to statement.
+  \item Read proof script (\texttt{by ...}) minimally.
+  \item Re-run in Lean and modify one line for active recall.
+\end{enumerate}
+
+\section{AxlerLean/Basic.lean (Template Artifact)}
+\begin{readpoint}
+This file is currently a minimal template artifact:
+\texttt{def hello := "world"}.
+It does not carry chapter math content.
+\end{readpoint}
+
+\begin{lstlisting}
+def hello := "world"
+\end{lstlisting}
+
+\section{Main.lean (Executable Entry)}
+\begin{readpoint}
+This is the executable entry for \texttt{lake build}. It prints a load message.
+\end{readpoint}
+
+\begin{lstlisting}
+import AxlerLean
+
+def main : IO Unit :=
+  IO.println "AxlerLean: chapter-wise Lean summary loaded."
+\end{lstlisting}
+
+\section*{Build}
+\subsection*{Lean build}
+\begin{verbatim}
+cd "TheMathBook/Part I/Linear Algebra"
+lake build
+\end{verbatim}
+
+\subsection*{LaTeX build}
+\begin{verbatim}
+cd "TheMathBook/Part I/Linear Algebra/latex"
+pdflatex LeanAll.tex
+\end{verbatim}
+
+\section*{Recommended Reading Order}
+\begin{enumerate}[leftmargin=1.5em]
+  \item \texttt{AxlerSummary.lean} (concept map)
+  \item \texttt{Exercises.lean} Basic -> Standard -> Challenge
+  \item Re-open target theorem in Lean and replay proof
+\end{enumerate}
+
+\end{document}

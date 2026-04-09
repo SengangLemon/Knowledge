@@ -145,3 +145,17 @@ lake build
 - 컴파일:
   - `cd "TheMathBook/Part I/Linear Algebra/latex"`
   - `pdflatex Exercises.tex` (또는 `xelatex Exercises.tex`)
+
+### 전체 Lean 변환 문서
+
+- 파일: `latex/LeanAll.tex`
+- 범위: 현재 프로젝트의 모든 Lean 파일
+  - `AxlerLean.lean`
+  - `AxlerLean/AxlerSummary.lean`
+  - `AxlerLean/Exercises.lean`
+  - `AxlerLean/Basic.lean`
+  - `Main.lean`
+- 특징: 파일별 역할 설명 + 장별 핵심 정리 이름 + 읽기 순서까지 포함한 사람 친화형 문서
+- 컴파일:
+  - `cd "TheMathBook/Part I/Linear Algebra/latex"`
+  - `pdflatex LeanAll.tex` (또는 `xelatex LeanAll.tex`)
