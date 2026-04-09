@@ -103,6 +103,16 @@ Strang의 계산/응용 중심 흐름과 Axler의 구조/증명 중심 흐름을
 
 > 다음 단계 제안: 위 Draft를 기준으로 12개 장의 상세 섹션(학습목표, 필수정리, 대표예제, 과제)을 1차 버전으로 확장.
 
+## Chapter 본문(정의/예제/풀이/증명/연습문제)
+
+- 통합 본문 파일: `ChapterBook.md`
+- 포함 항목:
+  - Chapter 1~9 정의
+  - 개념 요약
+  - 핵심 정리와 증명(또는 증명 스케치)
+  - 예제와 풀이
+  - 연습문제와 전부 풀이
+
 ## Lean 4 Formalization (Axler 기반 간단 버전)
 
 - 프로젝트 루트: `TheMathBook/Part I/Linear Algebra`
