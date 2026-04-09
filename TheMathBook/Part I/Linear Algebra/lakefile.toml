@@ -1,0 +1,10 @@
+name = "AxlerLean"
+version = "0.1.0"
+defaultTargets = ["axlerlean"]
+
+[[lean_lib]]
+name = "AxlerLean"
+
+[[lean_exe]]
+name = "axlerlean"
+root = "Main"
