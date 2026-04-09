@@ -137,3 +137,11 @@ lake build
   - `Exercises.Standard.p9_map_zero`
   - `Exercises.Challenge.p17_det_equal_rows`
 - 목표: Axler 흐름(벡터공간 -> 선형사상 -> 고유값 -> 내적 -> 결정식)을 문제 단위로 빠르게 복습
+
+## LaTeX 동반 문서
+
+- 파일: `latex/Exercises.tex`
+- 용도: Lean 문제-정답 파일(`AxlerLean/Exercises.lean`)을 읽기 쉬운 문서 형태로 병행 보관
+- 컴파일:
+  - `cd "TheMathBook/Part I/Linear Algebra/latex"`
+  - `pdflatex Exercises.tex` (또는 `xelatex Exercises.tex`)

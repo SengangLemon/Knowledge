@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{AxlerLean Exercises\\(Lean + LaTeX Companion)}
+\author{TheMathBook / Part I / Linear Algebra}
+\date{\today}
+
+\newtheorem*{problem}{Problem}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+\maketitle
+
+\section*{How This File Matches Lean}
+Source of truth is:
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{AxlerLean/Exercises.lean}
+\end{itemize}
+
+This LaTeX file is a readable companion. The theorem names below match Lean theorem IDs.
+
+\section*{Basic (p1--p6)}
+
+\begin{problem}[p1\_zero\_smul\_vec]
+Show that $0 \cdot v = 0$ coordinatewise.
+\end{problem}
+\begin{solution}
+For each coordinate $i$, we have $0 \cdot v_i = 0$. Hence the two functions are equal by extensionality.
+\end{solution}
+
+\begin{problem}[p2\_vec\_ext]
+If all coordinates agree, prove $u=v$.
+\end{problem}
+\begin{solution}
+Assume $\forall i,\ u_i=v_i$. Equality of vectors follows from coordinatewise equality.
+\end{solution}
+
+\begin{problem}[p3\_id\_apply]
+Identity linear map acts as identity.
+\end{problem}
+\begin{solution}
+By definition of \texttt{LinearMap.id}, \texttt{toFun v = v}.
+\end{solution}
+
+\begin{problem}[p4\_eval\_at\_zero]
+For $f(x)=ax+b$, show $f(0)=b$.
+\end{problem}
+\begin{solution}
+$f(0)=a\cdot0+b=b$.
+\end{solution}
+
+\begin{problem}[p5\_add\_zero\_vec]
+Show that $v+0=v$ coordinatewise.
+\end{problem}
+\begin{solution}
+For each coordinate, $v_i+0=v_i$. Thus the vector functions are equal.
+\end{solution}
+
+\begin{problem}[p6\_det\_zero\_matrix]
+In the $2\times2$ model, prove $\det\!\begin{bmatrix}0&0\\0&0\end{bmatrix}=0$.
+\end{problem}
+\begin{solution}
+Using $\det\begin{bmatrix}a&b\\c&d\end{bmatrix}=ad-bc$, substitute $a=b=c=d=0$.
+\end{solution}
+
+\section*{Standard (p7--p12)}
+
+\begin{problem}[p7\_eigen\_nonzero]
+If $v$ is an eigenvector by definition, show $v\neq0$.
+\end{problem}
+\begin{solution}
+Immediate from the first conjunct in the Lean predicate \texttt{IsEigenvector}.
+\end{solution}
+
+\begin{problem}[p8\_dot\_zero\_left]
+For the 2D dot model, prove $\mathrm{dot}(0,u)=0$.
+\end{problem}
+\begin{solution}
+Expand the definition and simplify both terms to zero.
+\end{solution}
+
+\begin{problem}[p9\_map\_zero]
+Every linear map sends the zero vector to zero.
+\end{problem}
+\begin{solution}
+Use linearity with scalar $0$: $T(0\cdot \mathbf{1})=0\cdot T(\mathbf{1})=0$.
+\end{solution}
+
+\begin{problem}[p10\_conj\_involutive]
+Conjugation is involutive in the Pair model.
+\end{problem}
+\begin{solution}
+Apply conjugation twice: $(\mathrm{re},\mathrm{im})\mapsto(\mathrm{re},-\mathrm{im})\mapsto(\mathrm{re},\mathrm{im})$.
+\end{solution}
+
+\begin{problem}[p11\_comp\_id\_right]
+Show $f\circ \mathrm{id}=f$.
+\end{problem}
+\begin{solution}
+Directly from the proved lemma \texttt{LinearMap.comp\_id\_right}.
+\end{solution}
+
+\begin{problem}[p12\_eval\_at\_one]
+For $f(x)=ax+b$, show $f(1)=a+b$.
+\end{problem}
+\begin{solution}
+$f(1)=a\cdot1+b=a+b$.
+\end{solution}
+
+\section*{Challenge (p13--p18)}
+
+\begin{problem}[p13\_comp\_id\_left]
+Show $\mathrm{id}\circ f=f$.
+\end{problem}
+\begin{solution}
+Directly from \texttt{LinearMap.comp\_id\_left}.
+\end{solution}
+
+\begin{problem}[p14\_comp\_assoc]
+Show associativity of composition.
+\end{problem}
+\begin{solution}
+Use \texttt{LinearMap.comp\_assoc}.
+\end{solution}
+
+\begin{problem}[p15\_vec\_zero\_unique]
+If all coordinates of $v$ are zero, show $v=0$.
+\end{problem}
+\begin{solution}
+Apply function extensionality with the coordinate hypothesis.
+\end{solution}
+
+\begin{problem}[p16\_dot\_comm]
+In the 2D model, prove $\mathrm{dot}(u,v)=\mathrm{dot}(v,u)$.
+\end{problem}
+\begin{solution}
+Commutativity of integer multiplication on each coordinate term.
+\end{solution}
+
+\begin{problem}[p17\_det\_equal\_rows]
+If two rows are equal, determinant is zero (2x2 model).
+\end{problem}
+\begin{solution}
+Substitute $(a,b)$ and $(a,b)$ in $ad-bc$, giving $ab-ba=0$.
+\end{solution}
+
+\begin{problem}[p18\_conj\_re\_fixed]
+Real part is invariant under conjugation.
+\end{problem}
+\begin{solution}
+From the definition \texttt{conj (re,im) = (re,-im)}.
+\end{solution}
+
+\section*{Build}
+From this directory:
+\begin{verbatim}
+pdflatex Exercises.tex
+\end{verbatim}
+or
+\begin{verbatim}
+xelatex Exercises.tex
+\end{verbatim}
+
+\end{document}
